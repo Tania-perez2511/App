@@ -133,7 +133,7 @@ class _MainScreenState extends State<MainScreen> {
 
  Widget _crearCarruselSistemas() {
   return CarouselSlider(
-    options: CarouselOptions(height: 325.0, autoPlay: false),
+    options: CarouselOptions(height: 342.0, autoPlay: false),
     items: _sistemas.map((sistema) {
       return Builder(
         builder: (BuildContext context) {
@@ -181,8 +181,8 @@ Widget _crearFiltros() {
   ];
 
   return Container(
-    height: 290,
-    margin: EdgeInsets.only(top: 10),  // Ajusta el valor según sea necesario
+    height: 120,
+    margin: EdgeInsets.only(top: 14),  // Ajusta el valor según sea necesario
     padding: EdgeInsets.symmetric(horizontal: 1),
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
@@ -197,7 +197,7 @@ Widget _crearFiltros() {
           child: Column(
             children: [
               CircleAvatar(
-                radius: 65,
+                radius: 35,
                 backgroundColor: Colors.transparent,
                 backgroundImage: AssetImage(imagenPath),
               ),
@@ -225,43 +225,49 @@ Widget _crearFiltros() {
 }
 
 Widget _crearGridCuerposCelestes() {
-  return SingleChildScrollView(
-    scrollDirection: Axis.horizontal,
-    child: Row(
-      children: _cuerposFiltrados.map((cuerpo) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  CuerpoCelesteDescripcionScreen(cuerpoCeleste: cuerpo),
-            ));
-          },
-          child: Column(
-            children: <Widget>[
-              ClipOval(
-                child: Container(
-                  width: 120, // Ajusta el ancho según tus necesidades
-                  height: 120, // Ajusta la altura según tus necesidades
-                  child: Image.file(
-                    File(cuerpo.foto),
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.error);
-                    },
+  return Container(
+    margin: EdgeInsets.only(bottom: 20), // Ajusta el valor según sea necesario
+    child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: _cuerposFiltrados.map((cuerpo) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    CuerpoCelesteDescripcionScreen(cuerpoCeleste: cuerpo),
+              ));
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+              child: Column(
+                children: <Widget>[
+                  ClipOval(
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      child: Image.file(
+                        File(cuerpo.foto),
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Icon(Icons.error);
+                        },
+                      ),
+                    ),
                   ),
-                ),
+                  SizedBox(height: 2),
+                  Text(
+                    cuerpo.nombre,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 2),  // Ajusta el valor según tus necesidades
-              Text(
-                cuerpo.nombre,
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+            ),
+          );
+        }).toList(),
+      ),
     ),
   );
 }

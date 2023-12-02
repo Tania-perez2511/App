@@ -154,7 +154,7 @@ class _AddCuerpoCelesteScreenState extends State<AddCuerpoCelesteScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Size in km'),
+                decoration: InputDecoration(labelText: 'Size'),
                 onSaved: (value) => _tamano = double.parse(value!),
                 keyboardType: TextInputType.number,
               ),
@@ -177,7 +177,7 @@ class _AddCuerpoCelesteScreenState extends State<AddCuerpoCelesteScreen> {
                     _sistemaId = newValue;
                   });
                 },
-                decoration: InputDecoration(labelText: 'System'),
+                decoration: InputDecoration(labelText: 'Choose System that comes from'),
               ),
             ],
           ),
